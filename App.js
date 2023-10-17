@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
-export default function App() {
+import Tela1 from './Tela1';
+import Tela2 from './Tela2';
+import Tela3 from './Tela3';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
+const Tab = createBottomTabNavigator()
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator backBehavior='history'>
+        <Tab.Screen name='Home' component={Tela1} options={{tabBarIcon: () => <MaterialCommunityIcons name="basketball" size={24} color="black" />}}/>
+        <Tab.Screen name='Player' component={Tela2} options={{tabBarIcon: () => <MaterialCommunityIcons name="basketball-hoop" size={24} color="black" />}}/>
+        <Tab.Screen name='Year' component={Tela3} options={{tabBarIcon: () => <Ionicons name="stats-chart" size={24} color="black" />}}/>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
